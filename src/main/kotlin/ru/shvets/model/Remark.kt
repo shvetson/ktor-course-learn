@@ -10,14 +10,7 @@ import org.jetbrains.exposed.sql.Table
  */
 
 @Serializable
-data class Note(
+data class Remark(
     val id: Long,
     val note: String,
 )
-
-object Notes: Table("notes") {
-    val id = long("id").autoIncrement()
-    val note = varchar("note", 1500)
-
-    override val primaryKey = PrimaryKey(id)
-}
