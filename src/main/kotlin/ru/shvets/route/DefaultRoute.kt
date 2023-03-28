@@ -35,7 +35,7 @@ fun Route.default() {
             call.respondText("Your are on Page number: $pageNumber")
         }
 
-        post("/login"){
+        post("/signup"){
             val person = call.receive<Person>()
             println(person)
             call.respondText("Everything working")
