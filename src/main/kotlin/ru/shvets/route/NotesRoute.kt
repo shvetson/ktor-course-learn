@@ -9,7 +9,6 @@ import org.ktorm.dsl.*
 import ru.shvets.db.DatabaseConnection
 import ru.shvets.entity.NotesEntity
 import ru.shvets.model.Note
-import ru.shvets.model.Remark
 import ru.shvets.request.NoteRequest
 import ru.shvets.response.NoteResponse
 
@@ -28,7 +27,7 @@ fun Application.notesRoute() {
                 .map {
                     val id = it[NotesEntity.id]
                     val note = it[NotesEntity.note]
-                    Remark(id ?: -1, note ?: "")
+                    Note(id ?: -1, note ?: "")
                 }
             call.respond(notes)
         }
@@ -67,7 +66,7 @@ fun Application.notesRoute() {
                 .map {
                     val id = it[NotesEntity.id]!!
                     val note = it[NotesEntity.note]!!
-                    Remark(
+                    Note(
                         id = id,
                         note = note
                     )

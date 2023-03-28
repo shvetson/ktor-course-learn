@@ -4,6 +4,7 @@ val logback_version: String by project
 val exposed_version: String by project
 val postgresql_version: String by project
 val ktorm_version: String by project
+val bcrypt_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -43,5 +44,8 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresql_version")
 
     implementation("org.ktorm:ktorm-core:$ktorm_version")
+
+    implementation("org.mindrot:jbcrypt:$bcrypt_version")
+
 
 }

@@ -11,41 +11,10 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused")
 fun Application.module() {
-//    DatabaseFactory.init()
 
     configureSerialization()
     configureRouting()
     contactUsModule()
-
-
-
-//    database.insert(NotesEntity){
-//        set(it.note, "Wash Clothes")
-//    }
-//    database.insert(NotesEntity){
-//        set(it.note, "Buy Groceries")
-//    }
-//    database.insert(NotesEntity){
-//        set(it.note, "Workout")
-//    }
-
-//    val notes = database.from(NotesEntity)
-//        .select()
-//
-//    for(row in notes) {
-//        println("${row[NotesEntity.id]}: ${row[NotesEntity.note]}")
-//    }
-
-//    database.update(NotesEntity) {
-//        set(it.note, "Learning Ktor")
-//        where {
-//            it.id eq 4
-//        }
-//    }
-
-//    database.delete(NotesEntity) {
-//        it.id eq 4
-//    }
 }
 
 //fun main() {
