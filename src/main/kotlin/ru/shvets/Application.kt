@@ -4,7 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.ktorm.database.Database
-import org.ktorm.dsl.insert
+import org.ktorm.dsl.*
 import ru.shvets.dao.DatabaseFactory
 import ru.shvets.entity.NotesEntity
 import ru.shvets.plugins.*
@@ -27,15 +27,33 @@ fun Application.module() {
         password = "postgres"
     )
 
-    database.insert(NotesEntity){
-        set(it.note, "Wash Clothes")
-    }
-    database.insert(NotesEntity){
-        set(it.note, "Buy Groceries")
-    }
-    database.insert(NotesEntity){
-        set(it.note, "Workout")
-    }
+//    database.insert(NotesEntity){
+//        set(it.note, "Wash Clothes")
+//    }
+//    database.insert(NotesEntity){
+//        set(it.note, "Buy Groceries")
+//    }
+//    database.insert(NotesEntity){
+//        set(it.note, "Workout")
+//    }
+
+//    val notes = database.from(NotesEntity)
+//        .select()
+//
+//    for(row in notes) {
+//        println("${row[NotesEntity.id]}: ${row[NotesEntity.note]}")
+//    }
+
+//    database.update(NotesEntity) {
+//        set(it.note, "Learning Ktor")
+//        where {
+//            it.id eq 4
+//        }
+//    }
+
+//    database.delete(NotesEntity) {
+//        it.id eq 4
+//    }
 }
 
 
