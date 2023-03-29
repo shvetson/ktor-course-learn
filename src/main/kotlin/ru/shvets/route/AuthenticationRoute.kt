@@ -2,6 +2,9 @@ package ru.shvets.route
 
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.config.yaml.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -12,9 +15,11 @@ import ru.shvets.entity.UserEntity
 import ru.shvets.model.User
 import ru.shvets.model.UserCredentials
 import ru.shvets.response.NoteResponse
+import ru.shvets.utils.TokenManager
 
-fun Application.authenticationRoute() {
+fun Application.authenticationRoute(config: YamlConfig) {
     val db = DatabaseConnection.database
+    val tokenManager = TokenManager(config)
 
     routing {
         post("/register") {
@@ -110,11 +115,28 @@ fun Application.authenticationRoute() {
                 return@post
             }
 
+            val token = tokenManager.generateJWTToken(user) // jwt
+
             call.respond(HttpStatusCode.OK,
             NoteResponse(
                 success = true,
-                data = "User successfully logged in"
+                data = token // jwt
+//                data = "User successfully logged in"
             ))
+        }
+
+        authenticate {
+            get("/me") {
+                val principal = call.principal<JWTPrincipal>()
+                println(principal?.payload?.claims?.toString())
+
+                if (principal != null) {
+                    val username = principal.payload.getClaim("username").asString()
+                    val userId = principal.payload.getClaim("userId").asLong()
+                    val exp = principal.payload.getClaim("exp").asDate()
+                    call.respondText("Hello, $username with id $userId, expire - $exp")
+                }
+            }
         }
     }
 }
